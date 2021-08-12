@@ -16,7 +16,7 @@ class SerieEntity extends Equatable {
     required this.image,
     required this.lastEpisode,
     required this.name,
-    required this.publisher,
+    this.publisher,
     required this.siteDetailUrl,
     required this.startYear,
   });
@@ -35,7 +35,7 @@ class SerieEntity extends Equatable {
   final Image image;
   final Episode lastEpisode;
   final String name;
-  final Publisher publisher;
+  final Publisher? publisher;
   final String siteDetailUrl;
   final String startYear;
 
@@ -67,7 +67,6 @@ class Characteres extends Equatable {
     required this.id,
     required this.name,
     required this.count,
-    required this.episodeNumber,
     this.siteDetailUrl,
   });
 
@@ -76,7 +75,6 @@ class Characteres extends Equatable {
   final String name;
   final String? siteDetailUrl;
   final String count;
-  final String episodeNumber;
 
   @override
   List<Object?> get props {
@@ -86,7 +84,6 @@ class Characteres extends Equatable {
       name,
       siteDetailUrl,
       count,
-      episodeNumber,
     ];
   }
 }

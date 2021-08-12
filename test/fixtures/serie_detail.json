@@ -1,0 +1,84 @@
+{
+    "error": "OK",
+    "limit": 100,
+    "offset": 0,
+    "number_of_page_results": 100,
+    "number_of_total_results": 819,
+    "status_code": 1,
+    "results": 
+        {
+            "aliases": "fake-alises",
+            "api_detail_url": "fake-api_detail_url",
+            "count_of_episodes": 1,
+            "date_added": "2013-09-23 14:13:53",
+            "date_last_updated": "2013-09-23 14:13:53",
+            "deck": null,
+            "description": "fake-description",
+            "characters": [
+                {
+                    "api_detail_url": "fake-api_detail_url",
+                    "id": 1,
+                    "name": "fake-name",
+                    "site_detail_url": "fake-site_detail_url",
+                    "count": "1"
+                },
+                {
+                    "api_detail_url": "fake-api_detail_url",
+                    "id": 1,
+                    "name": "fake-name",
+                    "site_detail_url": "fake-site_detail_url",
+                    "count": "1"
+                }
+            ],
+            "episodes": [
+                {
+                    "api_detail_url": "fake-api_detail_url",
+                    "id": 1,
+                    "name": "fake-name",
+                    "site_detail_url": "fake-site_detail_url",
+                    "episode_number": "101"
+                },
+                {
+                    "api_detail_url": "fake-api_detail_url",
+                    "id": 1,
+                    "name": "fake-name",
+                    "site_detail_url": "fake-site_detail_url",
+                    "episode_number": "103"
+                }
+            ],
+            "first_episode": {
+                "api_detail_url": "fake-api_detail_url",
+                "id": 1,
+                "name": "fake-name",
+                "episode_number": "fake-episode"
+            },
+            "id": 1,
+            "image": {
+                "icon_url": "fake-icon_url",
+                "medium_url": "fake-medium_url",
+                "screen_url": "fake-screen_url",
+                "screen_large_url": "fake-screen_large_url",
+                "small_url": "fake-small_url",
+                "super_url": "fake-super_url",
+                "thumb_url": "fake-thumb_url",
+                "tiny_url": "fake-tiny_url",
+                "original_url": "fake-original_url",
+                "image_tags": "fake-image_tags"
+            },
+            "last_episode": {
+                "api_detail_url": "fake-api_detail_url",
+                "id": 32765,
+                "name": "fake-name",
+                "episode_number": "fake-episode_number"
+            },
+            "name": "fake-name",
+            "publisher": {
+                "api_detail_url": "fake-api_detail_url",
+                "id": 31,
+                "name": "fake-name"
+            },
+            "site_detail_url": "fake-site_detail_url",
+            "start_year": "fake-start_year"
+        },
+        "version": "1.0"
+}

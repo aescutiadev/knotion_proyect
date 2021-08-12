@@ -13,6 +13,7 @@ class SerieModel extends SerieEntity {
   SerieModel({
     this.characters,
     this.episodes,
+    this.publisher,
     required this.aliases,
     required this.apiDetailUrl,
     required this.countOfEpisodes,
@@ -25,7 +26,6 @@ class SerieModel extends SerieEntity {
     required this.image,
     required this.lastEpisode,
     required this.name,
-    required this.publisher,
     required this.siteDetailUrl,
     required this.startYear,
   }) : super(
@@ -62,7 +62,7 @@ class SerieModel extends SerieEntity {
   final ImageModel image;
   final EpisodeModel lastEpisode;
   final String name;
-  final PublisherModel publisher;
+  final PublisherModel? publisher;
   final String siteDetailUrl;
   final String startYear;
 
@@ -70,31 +70,29 @@ class SerieModel extends SerieEntity {
       (json['results'] as List).map((i) => SerieModel.fromJson(i)).toList();
 
   factory SerieModel.fromJson(Map<String, dynamic> json) {
-    json = (json["results"]) ?? json;
+    json = (json["results"]) ?? json; // Validación de Null - safety
     return SerieModel(
       aliases: json["aliases"],
       apiDetailUrl: json["api_detail_url"],
       characters: (json["characters"] != null)
-          ? json["characters"] ??
-              List<CharacteresModel>.from(
-                  json["characters"].map((x) => CharacteresModel.fromJson(x)))
+          ? List<CharacteresModel>.from(
+              json["characters"].map((x) => CharacteresModel.fromJson(x)))
           : null,
       countOfEpisodes: json["count_of_episodes"],
       dateAdded: DateTime.parse(json["date_added"]),
       dateLastUpdated: DateTime.parse(json["date_last_updated"]),
       deck: json["deck"],
-      description: json["description"],
+      description: json["description"] ?? 'no description',
       episodes: (json["episodes"] != null)
-          ? json["episodes"] ??
-              List<EpisodeModel>.from(
-                  json["episodes"].map((x) => EpisodeModel.fromJson(x)))
+          ? List<EpisodeModel>.from(
+              json["episodes"].map((x) => EpisodeModel.fromJson(x)))
           : null,
       firstEpisode: EpisodeModel.fromJson(json["first_episode"]),
       id: json["id"],
       image: ImageModel.fromJson(json["image"]),
       lastEpisode: EpisodeModel.fromJson(json["last_episode"]),
       name: json["name"],
-      publisher: PublisherModel.fromJson(json["publisher"]),
+      publisher: (json["publisher"] != null) ? PublisherModel.fromJson(json["publisher"]) : null,
       siteDetailUrl: json["site_detail_url"],
       startYear: json["start_year"],
     );
@@ -115,7 +113,7 @@ class SerieModel extends SerieEntity {
         "image": image.toJson(),
         "last_episode": lastEpisode.toJson(),
         "name": name,
-        "publisher": publisher.toJson(),
+        "publisher": publisher!.toJson(),
         "site_detail_url": siteDetailUrl,
         "start_year": startYear,
       };
@@ -127,14 +125,12 @@ class CharacteresModel extends Characteres {
     required this.id,
     required this.name,
     required this.count,
-    required this.episodeNumber,
     this.siteDetailUrl,
   }) : super(
           apiDetailUrl: apiDetailUrl,
           id: id,
           name: name,
           count: count,
-          episodeNumber: episodeNumber,
           siteDetailUrl: siteDetailUrl,
         );
 
@@ -143,7 +139,6 @@ class CharacteresModel extends Characteres {
   final String name;
   final String? siteDetailUrl;
   final String count;
-  final String episodeNumber;
 
   factory CharacteresModel.fromJson(Map<String, dynamic> json) =>
       CharacteresModel(
@@ -152,7 +147,6 @@ class CharacteresModel extends Characteres {
         name: json["name"],
         siteDetailUrl: json["site_detail_url"],
         count: json["count"],
-        episodeNumber: json["episode_number"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -161,7 +155,6 @@ class CharacteresModel extends Characteres {
         "name": name,
         "site_detail_url": siteDetailUrl,
         "count": count,
-        "episode_number": episodeNumber,
       };
 }
 

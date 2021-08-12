@@ -11,11 +11,23 @@ class SerieDataSourceImpl implements SerieDataSource {
   SerieDataSourceImpl(this.client);
   @override
   Future<List<SerieEntity>> getSerieList() async {
-    final uri = Uri.parse(BASE_URL + SERIES_LIST_ENDPOINT);
+    final uri = Uri.parse(BASE_URL + SERIES_LIST_ENDPOINT + API_KEY);
     final response = await client
         .get(uri, headers: <String, String>{'Accept': 'application/json'});
     if (response.statusCode == 200) {
       return serieFromJsonToList(response.body);
+    } else {
+      throw ServerExeption();
+    }
+  }
+
+  @override
+  Future<SerieEntity> getDetailSerie({required String endPoint}) async {
+    final uri = Uri.parse(endPoint + API_KEY);
+    final response = await client
+        .get(uri, headers: <String, String>{'Accept': 'application/json'});
+    if (response.statusCode == 200) {
+      return serieFromJson(response.body);
     } else {
       throw ServerExeption();
     }

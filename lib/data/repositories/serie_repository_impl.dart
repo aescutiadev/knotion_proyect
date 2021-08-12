@@ -18,6 +18,19 @@ class SerieReposotiryImplement implements SerieInterface {
       return Right(response);
     } on ServerExeption {
       return Left(ServerFailure(message: 'Error in get list data'));
+    } 
+  }
+
+  @override
+  Future<Either<Failure, SerieEntity>> getDetailSerie({required String endPoint}) async {
+    try {
+      final response = await serieDataSource.getDetailSerie(endPoint: endPoint);
+
+      return Right(response);
+    } on ServerExeption {
+      return Left(ServerFailure(message: 'Error in get list data'));
+    } on Exception {
+      return Left(ServerFailure(message: 'Error desconocido'));
     }
   }
 }

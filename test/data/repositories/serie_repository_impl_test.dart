@@ -23,6 +23,22 @@ void main() {
   });
 
   final tSerie = SerieEntity(
+    characters: <Characteres>[
+      Characteres(
+        apiDetailUrl: 'apiDetailUrl',
+        id: 1,
+        name: 'name',
+        count: 'count',
+      )
+    ],
+    episodes: <Episode>[
+      Episode(
+        apiDetailUrl: 'apiDetailUrl',
+        id: 1,
+        name: 'name',
+        episodeNumber: 'episodeNumber',
+      )
+    ],
     aliases: 'aliases',
     apiDetailUrl: 'apiDetailUrl',
     countOfEpisodes: 01,
@@ -69,6 +85,8 @@ void main() {
 
   final serieList = <SerieEntity>[];
 
+  final tEndPoint = 'url-fake';
+
   group('Dev List series', () {
     test('the get data is successfuly', () async {
       when(mockSerieDataSourceImpl!.getSerieList())
@@ -83,6 +101,26 @@ void main() {
       when(mockSerieDataSourceImpl!.getSerieList()).thenThrow(ServerExeption());
 
       final result = await serieReposotiryImplement!.getListSerie();
+
+      expect(result, Left(ServerFailure(message: 'Error in get list data')));
+    });
+  });
+
+  group('Dev Detail series', () {
+    test('the get data datail serie is successfuly', () async {
+      when(mockSerieDataSourceImpl!.getDetailSerie(endPoint: tEndPoint))
+          .thenAnswer((_) async => tSerie);
+
+      final result = await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
+
+      expect(result, Right(tSerie));
+    });
+
+    test('the get data datail serie is failure', () async {
+      when(mockSerieDataSourceImpl!.getDetailSerie(endPoint: tEndPoint))
+          .thenThrow(ServerExeption());
+
+      final result = await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
 
       expect(result, Left(ServerFailure(message: 'Error in get list data')));
     });
