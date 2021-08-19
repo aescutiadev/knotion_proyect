@@ -14,3 +14,8 @@ abstract class Failure extends Equatable {
 class ServerFailure extends Failure {
   ServerFailure({required String message}) : super(message: message);
 }
+
+class NoInternetConnectionFailure extends Failure {
+  NoInternetConnectionFailure({required String message})
+      : super(message: message);
+}

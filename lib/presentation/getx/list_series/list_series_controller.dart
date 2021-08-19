@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
-import 'package:the_series_db/core/failure.dart';
+import 'package:the_series_db/core/errors/failure.dart';
 import 'package:the_series_db/domain/entities/serie_entity.dart';
 import 'package:the_series_db/domain/usecases/get_list_of_series_usecase.dart';
 

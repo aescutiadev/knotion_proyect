@@ -6,7 +6,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:the_series_db/core/failure.dart' as _i5;
+import 'package:the_series_db/core/errors/failure.dart' as _i5;
 import 'package:the_series_db/domain/entities/serie_entity.dart' as _i6;
 import 'package:the_series_db/domain/interfaces/serie_interface.dart' as _i3;
 

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:the_series_db/core/failure.dart';
+import 'package:the_series_db/core/errors/failure.dart';
 import 'package:the_series_db/domain/entities/serie_entity.dart';
 import 'package:the_series_db/domain/interfaces/serie_interface.dart';
 import 'package:the_series_db/domain/usecases/get_list_of_series_usecase.dart';

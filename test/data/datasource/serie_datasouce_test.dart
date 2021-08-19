@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:the_series_db/core/constants.dart';
-import 'package:the_series_db/core/exceptions.dart';
+import 'package:the_series_db/core/errors/exceptions.dart';
 import 'package:the_series_db/data/datasource/serie_datasouce.dart';
 import 'package:the_series_db/data/models/serie_model.dart';
 

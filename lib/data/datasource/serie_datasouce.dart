@@ -1,6 +1,6 @@
 import 'package:the_series_db/core/abstract_datasource/serie_abstract_datasource.dart';
 import 'package:the_series_db/core/constants.dart';
-import 'package:the_series_db/core/exceptions.dart';
+import 'package:the_series_db/core/errors/exceptions.dart';
 import 'package:the_series_db/data/models/serie_model.dart';
 import 'package:the_series_db/domain/entities/serie_entity.dart';
 import 'package:http/http.dart' as http;

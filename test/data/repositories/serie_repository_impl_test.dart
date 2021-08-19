@@ -2,24 +2,29 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:the_series_db/core/exceptions.dart';
-import 'package:the_series_db/core/failure.dart';
+import 'package:the_series_db/core/connection/network_info.dart';
+import 'package:the_series_db/core/constants.dart';
+import 'package:the_series_db/core/errors/exceptions.dart';
+import 'package:the_series_db/core/errors/failure.dart';
 import 'package:the_series_db/data/datasource/serie_datasouce.dart';
 import 'package:the_series_db/data/repositories/serie_repository_impl.dart';
 import 'package:the_series_db/domain/entities/serie_entity.dart';
 
 import 'serie_repository_impl_test.mocks.dart';
 
-@GenerateMocks([SerieDataSourceImpl])
+@GenerateMocks([SerieDataSourceImpl, NetworkInfo])
 void main() {
   SerieReposotiryImplement? serieReposotiryImplement;
-
   MockSerieDataSourceImpl? mockSerieDataSourceImpl;
+  MockNetworkInfo? mockNetworkInfo;
 
   setUp(() {
     mockSerieDataSourceImpl = MockSerieDataSourceImpl();
-    serieReposotiryImplement =
-        SerieReposotiryImplement(mockSerieDataSourceImpl!);
+    mockNetworkInfo = MockNetworkInfo();
+    serieReposotiryImplement = SerieReposotiryImplement(
+      networkInfo: mockNetworkInfo!,
+      serieDataSource: mockSerieDataSourceImpl!,
+    );
   });
 
   final tSerie = SerieEntity(
@@ -87,7 +92,22 @@ void main() {
 
   final tEndPoint = 'url-fake';
 
+  test('Should check if device is online', () async {
+    when(mockNetworkInfo!.isConnected).thenAnswer((_) async => true);
+
+    when(mockSerieDataSourceImpl!.getSerieList())
+        .thenAnswer((_) async => serieList);
+
+    await serieReposotiryImplement!.getListSerie();
+
+    verify(mockNetworkInfo!.isConnected);
+  });
+
   group('Dev List series', () {
+    setUp(() {
+      when(mockNetworkInfo!.isConnected).thenAnswer((_) async => true);
+    });
+
     test('the get data is successfuly', () async {
       when(mockSerieDataSourceImpl!.getSerieList())
           .thenAnswer((_) async => serieList);
@@ -102,16 +122,20 @@ void main() {
 
       final result = await serieReposotiryImplement!.getListSerie();
 
-      expect(result, Left(ServerFailure(message: 'Error in get list data')));
+      expect(result, Left(ServerFailure(message: SERVER_ERROR)));
     });
   });
 
   group('Dev Detail series', () {
+    setUp(() {
+      when(mockNetworkInfo!.isConnected).thenAnswer((_) async => true);
+    });
     test('the get data datail serie is successfuly', () async {
       when(mockSerieDataSourceImpl!.getDetailSerie(endPoint: tEndPoint))
           .thenAnswer((_) async => tSerie);
 
-      final result = await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
+      final result =
+          await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
 
       expect(result, Right(tSerie));
     });
@@ -120,9 +144,10 @@ void main() {
       when(mockSerieDataSourceImpl!.getDetailSerie(endPoint: tEndPoint))
           .thenThrow(ServerExeption());
 
-      final result = await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
+      final result =
+          await serieReposotiryImplement!.getDetailSerie(endPoint: tEndPoint);
 
-      expect(result, Left(ServerFailure(message: 'Error in get list data')));
+      expect(result, Left(ServerFailure(message: SERVER_ERROR)));
     });
   });
 }

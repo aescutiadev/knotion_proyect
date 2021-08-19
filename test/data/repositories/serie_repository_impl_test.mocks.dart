@@ -6,6 +6,7 @@ import 'dart:async' as _i5;
 
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:the_series_db/core/connection/network_info.dart' as _i6;
 import 'package:the_series_db/data/datasource/serie_datasouce.dart' as _i4;
 import 'package:the_series_db/domain/entities/serie_entity.dart' as _i3;
 
@@ -44,6 +45,22 @@ class MockSerieDataSourceImpl extends _i1.Mock
               Invocation.method(#getDetailSerie, [], {#endPoint: endPoint}),
               returnValue: Future<_i3.SerieEntity>.value(_FakeSerieEntity_1()))
           as _i5.Future<_i3.SerieEntity>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [NetworkInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkInfo extends _i1.Mock implements _i6.NetworkInfo {
+  MockNetworkInfo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<bool> get isConnected =>
+      (super.noSuchMethod(Invocation.getter(#isConnected),
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
   @override
   String toString() => super.toString();
 }
